@@ -36,19 +36,20 @@ class AmusementPark:
         else:
             self.visitor_count_history[self.attraction][month] = 1
 
+
     def plot_visitor_count_over_time(self):
-        months_to_plot = input("Enter the month names separated by commas (e.g., January, February, March) to view the number of visitors: ").split(",")
-        months_to_plot = [month.strip() for month in months_to_plot]
-        filtered_history = {month: count for month, count in self.visitor_count_history[self.attraction].items() if month in months_to_plot}
-        visitor_counts = list(filtered_history.values())
-        months = list(filtered_history.keys())
-        plt.plot(months, visitor_counts)
-        plt.title(f'Visitor Count by Month at {self.attraction}')
-        plt.xlabel('Month')
-        plt.ylabel('Visitor Count')
-        plt.xticks(rotation=45)
-        plt.tight_layout()
-        plt.show()
+      months_to_plot = input("Enter the month names separated by commas (e.g., January, February, March) to view the number of visitors: ").split(",")
+      months_to_plot = [month.strip().upper() for month in months_to_plot]
+      filtered_history = {month: count for month, count in self.visitor_count_history[self.attraction].items() if month.upper() in months_to_plot}
+      visitor_counts = list(filtered_history.values())
+      months = list(filtered_history.keys())
+      plt.plot(months, visitor_counts)
+      plt.title(f'Visitor Count by Month at {self.attraction}')
+      plt.xlabel('Month')
+      plt.ylabel('Visitor Count')
+      plt.xticks(rotation=45)
+      plt.tight_layout()
+      plt.show()
 
 class Revenue:
     def __init__(self, source, payment_method):
@@ -187,40 +188,3 @@ plt.xlabel("Payment Method")
 plt.ylabel("Revenue")
 plt.show()
 
-
-import matplotlib.pyplot as plt
-import random
-from datetime import datetime, timedelta
-
-class Expenses:
-    def __init__(self, category, amount, date):
-        self.category = category.title()
-        self.amount = amount
-        self.date = date
-
-# Create an empty list to store expenses
-expenses = []
-
-# Define expenses data
-expenses_data = [
-    {"category": "Maintenance", "amount": 200, "date": "2022-01-01"},
-    {"category": "Utilities", "amount": 150, "date": "2022-01-02"},
-    {"category": "Rent", "amount": 500, "date": "2022-01-03"},
-    # Add more expense items here...
-]
-
-# Loop through expenses data and create instances of the Expenses class
-for expense_data in expenses_data:
-    expense_instance = Expenses(**expense_data)
-    expenses.append(expense_instance)
-
-# Visualize expenses
-# You can use the expenses list to create visualizations of expenses
-# For example, you can create a bar plot of expenses by category
-categories = [expense.category for expense in expenses]
-amounts = [expense.amount for expense in expenses]
-plt.bar(categories, amounts)
-plt.title("Expenses by Category")
-plt.xlabel("Category")
-plt.ylabel("Amount")
-plt.show()
